@@ -788,6 +788,7 @@ const MainApp = () => {
                   <div className="flex items-center space-x-2">
                     <span className="text-2xl">
                       {activeTab === 'dashboard' ? '📊' : 
+                       activeTab === 'metaverse' ? '🌐' :
                        activeTab === 'story' ? '🎮' :
                        activeTab === 'staking' ? '🏦' :
                        activeTab === 'streaming' ? '🎥' :
@@ -795,6 +796,7 @@ const MainApp = () => {
                     </span>
                     <span className="text-white font-semibold">
                       {activeTab === 'dashboard' ? 'Dashboard' : 
+                       activeTab === 'metaverse' ? 'Metaverse' :
                        activeTab === 'story' ? 'Bitcoin-Jagd' :
                        activeTab === 'staking' ? 'Staking' :
                        activeTab === 'streaming' ? 'Live Streaming' :

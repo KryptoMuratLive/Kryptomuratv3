@@ -757,6 +757,7 @@ const MainApp = () => {
               <div className="flex space-x-4 mb-8 overflow-x-auto">
                 {[
                   { id: 'dashboard', label: 'Dashboard', icon: '📊' },
+                  { id: 'metaverse', label: 'Metaverse', icon: '🌐' },
                   { id: 'story', label: 'Bitcoin-Jagd', icon: '🎮' },
                   { id: 'staking', label: 'Staking', icon: '🏦' },
                   { id: 'streaming', label: 'Live Streaming', icon: '🎥' },

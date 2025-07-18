@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KryptoMurat Metaverse - Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #4ecdc4;
+        }
+        .feature-card p {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        .demo-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+        .demo-link:hover {
+            transform: scale(1.05);
+        }
+        .tech-stack {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        .tech-stack h3 {
+            color: #45b7d1;
+            margin-bottom: 20px;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .tech-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌐 KryptoMurat Metaverse</h1>
+            <p>Die ultimative Web3-Streaming-Plattform mit MURAT Token-Ökosystem</p>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="icon">🎥</div>
+                <h3>Live Stream Arena</h3>
+                <p>Zentrale Streaming-Bühne mit interaktiven Avataren und Echtzeit-Interaktion. Schaue exklusive Streams oder erstelle eigene Inhalte mit NFT-Zugangskontrollen.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🎭</div>
+                <h3>NFT Gallery</h3>
+                <p>Exklusive NFT-Sammlung mit MURAT Token-Marketplace. Kaufe, verkaufe und sammle einzigartige Meme-NFTs und digitale Kunstwerke.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🗳️</div>
+                <h3>Voting Chamber</h3>
+                <p>Community-Governance-System für Plattform-Entscheidungen. Stimme über neue Features, NFT-Kollektionen und Stream-Themen ab.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🎁</div>
+                <h3>Airdrop Zone</h3>
+                <p>Täglich verfügbare MURAT Token-Belohnungen. Sammle Airdrops, verdiene Rewards und steigere deine Plattform-Power.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">👑</div>
+                <h3>VIP Lounge</h3>
+                <p>Exklusiver Premium-Bereich für NFT-Besitzer und Top-Staker. Zugang zu besonderen Events, höheren Rewards und privaten Streams.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🪙</div>
+                <h3>MURAT Token</h3>
+                <p>Multifunktionaler Token für alle Plattform-Aktivitäten: NFT-Käufe, VIP-Zugang, Staking-Rewards und Governance-Voting.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="https://949949b8-c69c-4177-9f1e-2d335c0ad6dd.preview.emergentagent.com" class="demo-link">
+                🚀 Metaverse Betreten
+            </a>
+        </div>
+
+        <div class="tech-stack">
+            <h3>🛠️ Technologie-Stack</h3>
+            <div class="tech-grid">
+                <div class="tech-item">React</div>
+                <div class="tech-item">FastAPI</div>
+                <div class="tech-item">MongoDB</div>
+                <div class="tech-item">Web3.js</div>
+                <div class="tech-item">Polygon</div>
+                <div class="tech-item">Livepeer</div>
+                <div class="tech-item">TailwindCSS</div>
+                <div class="tech-item">OpenAI</div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 15px;">
+            <h3>🌟 Metaverse-Features</h3>
+            <p>✅ Wallet-basierter Zugang | ✅ NFT-Zugangskontrollen | ✅ MURAT Token-Ökosystem</p>
+            <p>✅ Community-Governance | ✅ Airdrop-System | ✅ Live-Streaming Integration</p>
+            <p>✅ Responsive Design | ✅ Mobile-First | ✅ Web3-Integration</p>
+        </div>
+    </div>
+</body>
+</html>

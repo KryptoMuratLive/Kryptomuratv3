@@ -9,6 +9,7 @@ import Impressum from './components/Impressum';
 import AGB from './components/AGB';
 import Datenschutz from './components/Datenschutz';
 import Nutzungsbedingungen from './components/Nutzungsbedingungen';
+import MetaverseWorld from './components/MetaverseWorld';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;

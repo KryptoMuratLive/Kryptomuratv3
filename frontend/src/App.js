@@ -696,42 +696,65 @@ const MainApp = () => {
         {!isConnected ? (
           /* Mobile-Optimized Landing Page with Animated Background */
           <div className="relative text-center py-10 md:py-20 overflow-hidden">
-            {/* Animated Background with CSS Gradient */}
+            {/* Animated Background with Web3 Image */}
             <div className="absolute inset-0 z-0">
-              {/* Animated CSS Background */}
+              {/* Option 1: If you save the image to /app/frontend/public/web3-background.jpg */}
+              <img 
+                src="/web3-background.jpg" 
+                alt="Steig ein bei Web3"
+                className="w-full h-full object-cover opacity-25"
+                style={{
+                  animation: 'float 8s ease-in-out infinite',
+                  filter: 'blur(0.5px) brightness(0.8) contrast(1.2)'
+                }}
+                onError={(e) => {
+                  // Fallback if image doesn't load
+                  e.target.style.display = 'none';
+                }}
+              />
+              
+              {/* Fallback CSS Background if image fails */}
               <div 
                 className="w-full h-full opacity-30"
                 style={{
                   background: `
                     linear-gradient(135deg, 
-                      rgba(255, 107, 107, 0.2) 0%, 
-                      rgba(78, 205, 196, 0.2) 25%, 
-                      rgba(69, 183, 209, 0.2) 50%, 
-                      rgba(255, 107, 107, 0.2) 75%, 
-                      rgba(139, 69, 19, 0.2) 100%
+                      rgba(255, 107, 107, 0.3) 0%, 
+                      rgba(78, 205, 196, 0.3) 25%, 
+                      rgba(69, 183, 209, 0.3) 50%, 
+                      rgba(255, 107, 107, 0.3) 75%, 
+                      rgba(139, 69, 19, 0.3) 100%
                     ),
-                    radial-gradient(circle at 20% 30%, rgba(255, 107, 107, 0.3) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 70%, rgba(78, 205, 196, 0.3) 0%, transparent 50%),
-                    radial-gradient(circle at 40% 80%, rgba(69, 183, 209, 0.3) 0%, transparent 50%)
+                    radial-gradient(circle at 20% 30%, rgba(255, 107, 107, 0.4) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 70%, rgba(78, 205, 196, 0.4) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 80%, rgba(69, 183, 209, 0.4) 0%, transparent 50%)
                   `,
-                  animation: 'float 8s ease-in-out infinite',
+                  animation: 'float 12s ease-in-out infinite',
                   backgroundSize: '400% 400%'
                 }}
               />
               
-              {/* Animated Cyber Elements */}
+              {/* Enhanced Cyber Elements */}
               <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-10 left-10 w-20 h-20 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full animate-pulse"></div>
-                <div className="absolute top-1/4 right-10 w-16 h-16 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full animate-bounce"></div>
-                <div className="absolute bottom-1/4 left-20 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full animate-pulse"></div>
-                <div className="absolute bottom-10 right-20 w-12 h-12 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-full animate-bounce"></div>
+                <div className="absolute top-10 left-10 w-20 h-20 bg-gradient-to-br from-orange-500/30 to-red-500/30 rounded-full animate-pulse"></div>
+                <div className="absolute top-1/4 right-10 w-16 h-16 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full animate-bounce"></div>
+                <div className="absolute bottom-1/4 left-20 w-24 h-24 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full animate-pulse"></div>
+                <div className="absolute bottom-10 right-20 w-12 h-12 bg-gradient-to-br from-yellow-500/30 to-orange-500/30 rounded-full animate-bounce"></div>
                 
-                {/* Animated Lines */}
-                <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500/30 to-transparent animate-pulse"></div>
-                <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-orange-500/30 to-transparent animate-pulse"></div>
+                {/* Bitcoin and Crypto Symbols */}
+                <div className="absolute top-32 left-32 text-4xl text-orange-500/40 animate-spin-slow">₿</div>
+                <div className="absolute top-64 right-32 text-3xl text-purple-500/40 animate-bounce">🚀</div>
+                <div className="absolute bottom-32 left-64 text-5xl text-blue-500/40 animate-pulse">💎</div>
+                <div className="absolute bottom-64 right-64 text-4xl text-green-500/40 animate-wiggle">🌟</div>
+                
+                {/* Animated Grid Lines */}
+                <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500/20 to-transparent animate-pulse"></div>
+                <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-orange-500/20 to-transparent animate-pulse"></div>
+                <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent animate-pulse"></div>
+                <div className="absolute bottom-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent animate-pulse"></div>
               </div>
               
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-900/80 via-blue-900/80 to-purple-900/80"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-900/70 via-blue-900/70 to-purple-900/70"></div>
             </div>
 
             {/* Floating Animation CSS */}

@@ -1355,6 +1355,357 @@ async def get_telegram_stats():
 async def root():
     return {"message": "KryptoMurat - Web3 Platform API"}
 
+# Metaverse World Routes
+@api_router.get("/metaverse/world")
+async def get_metaverse_world():
+    """Get metaverse world configuration"""
+    try:
+        return {
+            "world_name": "KryptoMurat Metaverse",
+            "areas": [
+                {
+                    "id": "live_stream",
+                    "name": "Live Stream Arena",
+                    "description": "Zentrale Streaming-Bühne",
+                    "position": {"x": 0, "y": 0},
+                    "access_level": "public"
+                },
+                {
+                    "id": "nft_gallery",
+                    "name": "NFT Gallery",
+                    "description": "Exklusive NFT-Sammlung",
+                    "position": {"x": -200, "y": 0},
+                    "access_level": "nft_required"
+                },
+                {
+                    "id": "voting_chamber",
+                    "name": "Voting Chamber",
+                    "description": "Community-Governance",
+                    "position": {"x": -200, "y": -100},
+                    "access_level": "public"
+                },
+                {
+                    "id": "airdrop_zone",
+                    "name": "Airdrop Zone",
+                    "description": "MURAT Token Belohnungen",
+                    "position": {"x": 200, "y": 0},
+                    "access_level": "public"
+                },
+                {
+                    "id": "vip_lounge",
+                    "name": "VIP Lounge",
+                    "description": "Exklusiver VIP-Bereich",
+                    "position": {"x": 200, "y": -100},
+                    "access_level": "premium"
+                }
+            ]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/metaverse/airdrop/available")
+async def get_available_airdrops():
+    """Get available MURAT token airdrops"""
+    try:
+        # Get current airdrops from database
+        airdrops = await db.metaverse_airdrops.find({"is_active": True}).to_list(100)
+        return airdrops
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/metaverse/airdrop/claim")
+async def claim_airdrop(claim_data: dict):
+    """Claim MURAT token airdrop"""
+    try:
+        wallet_address = claim_data.get("wallet_address")
+        airdrop_id = claim_data.get("airdrop_id")
+        
+        if not wallet_address or not airdrop_id:
+            raise HTTPException(status_code=400, detail="wallet_address and airdrop_id required")
+        
+        # Check if airdrop exists and is active
+        airdrop = await db.metaverse_airdrops.find_one({"id": airdrop_id, "is_active": True})
+        if not airdrop:
+            raise HTTPException(status_code=404, detail="Airdrop not found or inactive")
+        
+        # Check if user already claimed
+        existing_claim = await db.airdrop_claims.find_one({
+            "wallet_address": wallet_address,
+            "airdrop_id": airdrop_id
+        })
+        
+        if existing_claim:
+            raise HTTPException(status_code=400, detail="Airdrop already claimed")
+        
+        # Create claim record
+        claim_record = {
+            "id": str(uuid.uuid4()),
+            "wallet_address": wallet_address,
+            "airdrop_id": airdrop_id,
+            "amount": airdrop["amount"],
+            "claimed_at": datetime.utcnow(),
+            "status": "pending"
+        }
+        
+        await db.airdrop_claims.insert_one(claim_record)
+        
+        # In a real implementation, you would interact with the smart contract here
+        # For now, we'll simulate the claim
+        claim_record["status"] = "completed"
+        await db.airdrop_claims.update_one(
+            {"id": claim_record["id"]},
+            {"$set": {"status": "completed"}}
+        )
+        
+        return {
+            "success": True,
+            "amount": airdrop["amount"],
+            "transaction_hash": f"0x{uuid.uuid4().hex}",
+            "message": f"Successfully claimed {airdrop['amount']} MURAT tokens!"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/metaverse/marketplace/nfts")
+async def get_marketplace_nfts():
+    """Get NFTs available in the marketplace"""
+    try:
+        nfts = await db.metaverse_nfts.find({"is_listed": True}).to_list(100)
+        return nfts
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/metaverse/marketplace/buy")
+async def buy_nft_with_murat(purchase_data: dict):
+    """Buy NFT with MURAT tokens"""
+    try:
+        wallet_address = purchase_data.get("wallet_address")
+        nft_id = purchase_data.get("nft_id")
+        
+        if not wallet_address or not nft_id:
+            raise HTTPException(status_code=400, detail="wallet_address and nft_id required")
+        
+        # Get NFT info
+        nft = await db.metaverse_nfts.find_one({"id": nft_id, "is_listed": True})
+        if not nft:
+            raise HTTPException(status_code=404, detail="NFT not found or not listed")
+        
+        # Check user's MURAT balance
+        balance_response = await get_token_balance(wallet_address)
+        user_balance = float(balance_response.balance)
+        
+        if user_balance < nft["price"]:
+            raise HTTPException(status_code=400, detail="Insufficient MURAT balance")
+        
+        # Create purchase record
+        purchase_record = {
+            "id": str(uuid.uuid4()),
+            "wallet_address": wallet_address,
+            "nft_id": nft_id,
+            "price": nft["price"],
+            "purchased_at": datetime.utcnow(),
+            "transaction_hash": f"0x{uuid.uuid4().hex}",
+            "status": "completed"
+        }
+        
+        await db.nft_purchases.insert_one(purchase_record)
+        
+        # Update NFT ownership
+        await db.metaverse_nfts.update_one(
+            {"id": nft_id},
+            {"$set": {
+                "owner": wallet_address,
+                "is_listed": False,
+                "sold_at": datetime.utcnow()
+            }}
+        )
+        
+        return {
+            "success": True,
+            "nft": nft,
+            "transaction_hash": purchase_record["transaction_hash"],
+            "message": f"Successfully purchased {nft['name']} for {nft['price']} MURAT!"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/metaverse/voting/proposals")
+async def get_voting_proposals():
+    """Get active voting proposals"""
+    try:
+        proposals = await db.metaverse_proposals.find({"is_active": True}).to_list(100)
+        return proposals
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/metaverse/voting/vote")
+async def cast_vote(vote_data: dict):
+    """Cast a vote on a proposal"""
+    try:
+        wallet_address = vote_data.get("wallet_address")
+        proposal_id = vote_data.get("proposal_id")
+        vote_option = vote_data.get("vote_option")
+        
+        if not all([wallet_address, proposal_id, vote_option]):
+            raise HTTPException(status_code=400, detail="Missing required fields")
+        
+        # Check if proposal exists
+        proposal = await db.metaverse_proposals.find_one({"id": proposal_id, "is_active": True})
+        if not proposal:
+            raise HTTPException(status_code=404, detail="Proposal not found")
+        
+        # Check if user already voted
+        existing_vote = await db.metaverse_votes.find_one({
+            "wallet_address": wallet_address,
+            "proposal_id": proposal_id
+        })
+        
+        if existing_vote:
+            # Update existing vote
+            await db.metaverse_votes.update_one(
+                {"_id": existing_vote["_id"]},
+                {"$set": {
+                    "vote_option": vote_option,
+                    "updated_at": datetime.utcnow()
+                }}
+            )
+        else:
+            # Create new vote
+            vote_record = {
+                "id": str(uuid.uuid4()),
+                "wallet_address": wallet_address,
+                "proposal_id": proposal_id,
+                "vote_option": vote_option,
+                "vote_weight": 1,  # Can be enhanced with token-based voting power
+                "created_at": datetime.utcnow()
+            }
+            
+            await db.metaverse_votes.insert_one(vote_record)
+        
+        return {"success": True, "message": "Vote cast successfully"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/metaverse/gallery/{wallet_address}")
+async def get_user_nft_gallery(wallet_address: str):
+    """Get user's NFT gallery"""
+    try:
+        # Get NFTs owned by user
+        owned_nfts = await db.metaverse_nfts.find({"owner": wallet_address}).to_list(100)
+        
+        # Get NFTs from purchases
+        purchases = await db.nft_purchases.find({"wallet_address": wallet_address}).to_list(100)
+        
+        return {
+            "owned_nfts": owned_nfts,
+            "total_owned": len(owned_nfts),
+            "total_spent": sum(p.get("price", 0) for p in purchases)
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Initialize sample data
+@api_router.post("/metaverse/init-sample-data")
+async def init_sample_data():
+    """Initialize sample data for the metaverse (development only)"""
+    try:
+        # Sample airdrops
+        sample_airdrops = [
+            {
+                "id": "daily_bonus",
+                "name": "Daily Bonus",
+                "description": "Täglicher MURAT Bonus",
+                "amount": 50,
+                "image_url": "https://via.placeholder.com/150x150/ff6b6b/ffffff?text=DAILY",
+                "is_active": True,
+                "created_at": datetime.utcnow()
+            },
+            {
+                "id": "welcome_bonus",
+                "name": "Welcome Bonus",
+                "description": "Willkommensbonus für neue User",
+                "amount": 100,
+                "image_url": "https://via.placeholder.com/150x150/4ecdc4/ffffff?text=WELCOME",
+                "is_active": True,
+                "created_at": datetime.utcnow()
+            }
+        ]
+        
+        # Sample NFTs
+        sample_nfts = [
+            {
+                "id": "meme_nft_1",
+                "name": "Crypto Meme #1",
+                "description": "Legendary Pepe Meme",
+                "price": 250,
+                "image_url": "https://via.placeholder.com/300x300/ff9ff3/ffffff?text=MEME+1",
+                "category": "meme",
+                "rarity": "legendary",
+                "is_listed": True,
+                "owner": None,
+                "created_at": datetime.utcnow()
+            },
+            {
+                "id": "meme_nft_2",
+                "name": "Crypto Meme #2",
+                "description": "Rare Doge Meme",
+                "price": 150,
+                "image_url": "https://via.placeholder.com/300x300/f1c40f/ffffff?text=MEME+2",
+                "category": "meme",
+                "rarity": "rare",
+                "is_listed": True,
+                "owner": None,
+                "created_at": datetime.utcnow()
+            }
+        ]
+        
+        # Sample proposals
+        sample_proposals = [
+            {
+                "id": "proposal_1",
+                "title": "Neue NFT-Kollektion",
+                "description": "Sollen wir eine neue Meme-NFT-Kollektion erstellen?",
+                "options": ["Ja", "Nein", "Später"],
+                "is_active": True,
+                "created_at": datetime.utcnow(),
+                "ends_at": datetime.utcnow() + timedelta(days=7)
+            },
+            {
+                "id": "proposal_2",
+                "title": "Stream-Thema",
+                "description": "Welches Thema soll der nächste Stream haben?",
+                "options": ["Crypto News", "Gaming", "NFT Reviews"],
+                "is_active": True,
+                "created_at": datetime.utcnow(),
+                "ends_at": datetime.utcnow() + timedelta(days=3)
+            }
+        ]
+        
+        # Insert sample data
+        await db.metaverse_airdrops.delete_many({})
+        await db.metaverse_airdrops.insert_many(sample_airdrops)
+        
+        await db.metaverse_nfts.delete_many({})
+        await db.metaverse_nfts.insert_many(sample_nfts)
+        
+        await db.metaverse_proposals.delete_many({})
+        await db.metaverse_proposals.insert_many(sample_proposals)
+        
+        return {"success": True, "message": "Sample data initialized"}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 # Include the router in the main app
 app.include_router(api_router)
 

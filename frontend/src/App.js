@@ -694,61 +694,153 @@ const MainApp = () => {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-4 md:py-8">
         {!isConnected ? (
-          /* Mobile-Optimized Landing Page */
-          <div className="text-center py-10 md:py-20">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
-                Willkommen bei<br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">
+          /* Mobile-Optimized Landing Page with Animated Background */
+          <div className="relative text-center py-10 md:py-20 overflow-hidden">
+            {/* Animated Background Image */}
+            <div className="absolute inset-0 z-0">
+              <img 
+                src="https://i.imgur.com/VKZhXyZ.png" 
+                alt="Steig ein bei Web3"
+                className="w-full h-full object-cover opacity-20 animate-pulse"
+                style={{
+                  animation: 'float 6s ease-in-out infinite',
+                  filter: 'blur(1px) brightness(0.7)'
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-900/80 via-blue-900/80 to-purple-900/80"></div>
+            </div>
+
+            {/* Floating Animation CSS */}
+            <style jsx>{`
+              @keyframes float {
+                0%, 100% { transform: translateY(0px) scale(1); }
+                50% { transform: translateY(-20px) scale(1.02); }
+              }
+              @keyframes glow {
+                0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.5); }
+                50% { box-shadow: 0 0 40px rgba(255, 107, 107, 0.8), 0 0 80px rgba(255, 107, 107, 0.4); }
+              }
+              .animate-glow {
+                animation: glow 2s ease-in-out infinite;
+              }
+            `}</style>
+
+            <div className="relative z-10 max-w-4xl mx-auto">
+              <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                <span className="inline-block animate-bounce">🚀</span>
+                <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 animate-pulse">
+                  STEIG EIN BEI WEB3!
+                </span>
+                <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
                   KryptoMurat
                 </span>
               </h2>
               
-              <p className="text-lg md:text-xl text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto px-4">
-                Die ultimative Web3-Plattform mit gamifizierten Creator-Ökosystem! Spiele "Jagd auf den Bitcoin", 
-                stake MURAT Token, streame live und generiere AI-Content. Alles mit NFT-Integration!
+              <p className="text-xl md:text-2xl text-white mb-6 md:mb-8 max-w-3xl mx-auto px-4 font-semibold">
+                🌐 Die ultimative Web3-Metaverse-Plattform! 
+                <br/>
+                <span className="text-yellow-300">Spiele, stake, streame und sammle in der digitalen Zukunft!</span>
               </p>
               
+              {/* Animated Feature Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12 px-4">
-                <div className="bg-black/30 backdrop-blur-lg rounded-xl p-4 md:p-6 border border-purple-500/20">
-                  <div className="text-2xl md:text-3xl mb-2 md:mb-4">🪙</div>
-                  <h3 className="text-lg md:text-xl font-semibold text-white mb-2">MURAT Token</h3>
-                  <p className="text-sm md:text-base text-gray-400">Stake deine Token für bis zu 8% APY mit verschiedenen Laufzeiten</p>
+                <div className="bg-black/40 backdrop-blur-lg rounded-xl p-4 md:p-6 border border-orange-500/30 hover:border-orange-500/60 transition-all duration-300 transform hover:scale-105 hover:rotate-1">
+                  <div className="text-3xl md:text-4xl mb-2 md:mb-4 animate-spin-slow">🪙</div>
+                  <h3 className="text-lg md:text-xl font-bold text-orange-400 mb-2">MURAT Token</h3>
+                  <p className="text-sm md:text-base text-gray-300">Stake für bis zu 8% APY, kaufe NFTs und schalte VIP-Bereiche frei!</p>
                 </div>
                 
-                <div className="bg-black/30 backdrop-blur-lg rounded-xl p-4 md:p-6 border border-purple-500/20">
-                  <div className="text-2xl md:text-3xl mb-2 md:mb-4">🎥</div>
-                  <h3 className="text-lg md:text-xl font-semibold text-white mb-2">Live Streaming</h3>
-                  <p className="text-sm md:text-base text-gray-400">Schaue exklusive Streams und erstelle eigene Inhalte</p>
+                <div className="bg-black/40 backdrop-blur-lg rounded-xl p-4 md:p-6 border border-red-500/30 hover:border-red-500/60 transition-all duration-300 transform hover:scale-105 hover:-rotate-1">
+                  <div className="text-3xl md:text-4xl mb-2 md:mb-4 animate-bounce">🎥</div>
+                  <h3 className="text-lg md:text-xl font-bold text-red-400 mb-2">Metaverse Streaming</h3>
+                  <p className="text-sm md:text-base text-gray-300">Live-Streams in der virtuellen Welt mit NFT-Zugang und Community-Voting!</p>
                 </div>
                 
-                <div className="bg-black/30 backdrop-blur-lg rounded-xl p-4 md:p-6 border border-purple-500/20">
-                  <div className="text-2xl md:text-3xl mb-2 md:mb-4">🤖</div>
-                  <h3 className="text-lg md:text-xl font-semibold text-white mb-2">AI Content</h3>
-                  <p className="text-sm md:text-base text-gray-400">Generiere Memes, Comics und Stories mit KI-Unterstützung</p>
+                <div className="bg-black/40 backdrop-blur-lg rounded-xl p-4 md:p-6 border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 transform hover:scale-105 hover:rotate-1">
+                  <div className="text-3xl md:text-4xl mb-2 md:mb-4 animate-pulse">🎁</div>
+                  <h3 className="text-lg md:text-xl font-bold text-purple-400 mb-2">Airdrop Zone</h3>
+                  <p className="text-sm md:text-base text-gray-300">Täglich MURAT Token claimen und exklusive Belohnungen erhalten!</p>
                 </div>
                 
-                <div className="bg-black/30 backdrop-blur-lg rounded-xl p-4 md:p-6 border border-purple-500/20">
-                  <div className="text-2xl md:text-3xl mb-2 md:mb-4">🎮</div>
-                  <h3 className="text-lg md:text-xl font-semibold text-white mb-2">Jagd auf den Bitcoin</h3>
-                  <p className="text-sm md:text-base text-gray-400">Spiele das epische Adventure-Game und folge dem Bitcoin-Jäger</p>
+                <div className="bg-black/40 backdrop-blur-lg rounded-xl p-4 md:p-6 border border-green-500/30 hover:border-green-500/60 transition-all duration-300 transform hover:scale-105 hover:-rotate-1">
+                  <div className="text-3xl md:text-4xl mb-2 md:mb-4 animate-wiggle">🎮</div>
+                  <h3 className="text-lg md:text-xl font-bold text-green-400 mb-2">Bitcoin-Jagd</h3>
+                  <p className="text-sm md:text-base text-gray-300">Episches Adventure-Game mit Story-Entscheidungen und Reputation-System!</p>
                 </div>
                 
-                <div className="bg-black/30 backdrop-blur-lg rounded-xl p-4 md:p-6 border border-purple-500/20">
-                  <div className="text-2xl md:text-3xl mb-2 md:mb-4">🎭</div>
-                  <h3 className="text-lg md:text-xl font-semibold text-white mb-2">NFT Access</h3>
-                  <p className="text-sm md:text-base text-gray-400">Erhalte Zugang zu exklusiven Inhalten und Premium-Features</p>
+                <div className="bg-black/40 backdrop-blur-lg rounded-xl p-4 md:p-6 border border-yellow-500/30 hover:border-yellow-500/60 transition-all duration-300 transform hover:scale-105 hover:rotate-1">
+                  <div className="text-3xl md:text-4xl mb-2 md:mb-4 animate-spin">🎭</div>
+                  <h3 className="text-lg md:text-xl font-bold text-yellow-400 mb-2">NFT Marketplace</h3>
+                  <p className="text-sm md:text-base text-gray-300">Sammle, handle und verkaufe einzigartige NFTs mit MURAT Token!</p>
+                </div>
+
+                <div className="bg-black/40 backdrop-blur-lg rounded-xl p-4 md:p-6 border border-pink-500/30 hover:border-pink-500/60 transition-all duration-300 transform hover:scale-105 hover:-rotate-1">
+                  <div className="text-3xl md:text-4xl mb-2 md:mb-4 animate-bounce">🤖</div>
+                  <h3 className="text-lg md:text-xl font-bold text-pink-400 mb-2">AI Creator</h3>
+                  <p className="text-sm md:text-base text-gray-300">Generiere Memes, Comics und Content mit KI-Power!</p>
                 </div>
               </div>
               
-              <button
-                onClick={connectWallet}
-                disabled={loading}
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 md:py-4 px-6 md:px-8 rounded-xl text-lg md:text-xl transition-all duration-200 transform hover:scale-105 disabled:opacity-50"
-              >
-                {loading ? 'Verbinde...' : 'Abenteuer Starten'}
-              </button>
+              {/* Animated Call-to-Action Button */}
+              <div className="relative">
+                <button
+                  onClick={connectWallet}
+                  disabled={loading}
+                  className="relative bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white font-bold py-4 md:py-6 px-8 md:px-12 rounded-2xl text-xl md:text-2xl transition-all duration-300 transform hover:scale-110 disabled:opacity-50 animate-glow shadow-2xl"
+                >
+                  {loading ? (
+                    <span className="flex items-center">
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
+                      Verbinde...
+                    </span>
+                  ) : (
+                    <span className="flex items-center">
+                      🚀 JETZT EINSTEIGEN! 🚀
+                    </span>
+                  )}
+                </button>
+                
+                {/* Pulsing rings around button */}
+                <div className="absolute inset-0 rounded-2xl animate-ping bg-gradient-to-r from-orange-500/20 via-red-500/20 to-pink-500/20"></div>
+                <div className="absolute inset-0 rounded-2xl animate-pulse bg-gradient-to-r from-orange-500/10 via-red-500/10 to-pink-500/10"></div>
+              </div>
+
+              {/* Animated Text Below Button */}
+              <div className="mt-6 text-center">
+                <p className="text-white text-lg md:text-xl animate-pulse">
+                  💫 <span className="text-yellow-300 font-bold">Wallet verbinden</span> und in die <span className="text-purple-300 font-bold">Zukunft starten!</span> 💫
+                </p>
+                <p className="text-gray-300 text-sm md:text-base mt-2 animate-bounce">
+                  🎯 Polygon-Netzwerk | 🏆 MURAT Token | 🌐 Web3-Powered
+                </p>
+              </div>
             </div>
+
+            {/* Floating Elements */}
+            <div className="absolute top-20 left-10 text-4xl animate-bounce opacity-60">₿</div>
+            <div className="absolute top-40 right-20 text-3xl animate-pulse opacity-50">🚀</div>
+            <div className="absolute bottom-40 left-20 text-5xl animate-spin-slow opacity-40">🌟</div>
+            <div className="absolute bottom-20 right-10 text-4xl animate-bounce opacity-60">💎</div>
+            
+            {/* CSS for additional animations */}
+            <style jsx>{`
+              @keyframes spin-slow {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+              }
+              @keyframes wiggle {
+                0%, 100% { transform: rotate(-3deg); }
+                50% { transform: rotate(3deg); }
+              }
+              .animate-spin-slow {
+                animation: spin-slow 3s linear infinite;
+              }
+              .animate-wiggle {
+                animation: wiggle 1s ease-in-out infinite;
+              }
+            `}</style>
           </div>
         ) : (
           /* Mobile-Optimized Dashboard */

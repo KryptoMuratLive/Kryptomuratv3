@@ -11,7 +11,7 @@ from datetime import datetime
 import uuid
 
 # Configuration
-BACKEND_URL = "https://bfc90d64-0ec7-48fe-975b-e929ba60eaba.preview.emergentagent.com"
+BACKEND_URL = "https://949949b8-c69c-4177-9f1e-2d335c0ad6dd.preview.emergentagent.com"
 API_BASE = f"{BACKEND_URL}/api"
 TEST_WALLET = "0x742d35Cc6634C0532925a3b8D0F48BDf4b64fC44"
 

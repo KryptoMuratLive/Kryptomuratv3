@@ -84,7 +84,7 @@ const MainApp = () => {
     const swipeDistance = swipeStartX - swipeEndX;
     
     if (Math.abs(swipeDistance) > 50) {
-      const tabs = ['dashboard', 'story', 'staking', 'streaming', 'ai', 'nft'];
+      const tabs = ['dashboard', 'metaverse', 'story', 'staking', 'streaming', 'ai', 'nft'];
       const currentIndex = tabs.indexOf(activeTab);
       
       if (swipeDistance > 0 && currentIndex < tabs.length - 1) {

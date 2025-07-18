@@ -696,17 +696,41 @@ const MainApp = () => {
         {!isConnected ? (
           /* Mobile-Optimized Landing Page with Animated Background */
           <div className="relative text-center py-10 md:py-20 overflow-hidden">
-            {/* Animated Background Image */}
+            {/* Animated Background with CSS Gradient */}
             <div className="absolute inset-0 z-0">
-              <img 
-                src="https://i.imgur.com/VKZhXyZ.png" 
-                alt="Steig ein bei Web3"
-                className="w-full h-full object-cover opacity-20 animate-pulse"
+              {/* Animated CSS Background */}
+              <div 
+                className="w-full h-full opacity-30"
                 style={{
-                  animation: 'float 6s ease-in-out infinite',
-                  filter: 'blur(1px) brightness(0.7)'
+                  background: `
+                    linear-gradient(135deg, 
+                      rgba(255, 107, 107, 0.2) 0%, 
+                      rgba(78, 205, 196, 0.2) 25%, 
+                      rgba(69, 183, 209, 0.2) 50%, 
+                      rgba(255, 107, 107, 0.2) 75%, 
+                      rgba(139, 69, 19, 0.2) 100%
+                    ),
+                    radial-gradient(circle at 20% 30%, rgba(255, 107, 107, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 70%, rgba(78, 205, 196, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 80%, rgba(69, 183, 209, 0.3) 0%, transparent 50%)
+                  `,
+                  animation: 'float 8s ease-in-out infinite',
+                  backgroundSize: '400% 400%'
                 }}
               />
+              
+              {/* Animated Cyber Elements */}
+              <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-10 left-10 w-20 h-20 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full animate-pulse"></div>
+                <div className="absolute top-1/4 right-10 w-16 h-16 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full animate-bounce"></div>
+                <div className="absolute bottom-1/4 left-20 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full animate-pulse"></div>
+                <div className="absolute bottom-10 right-20 w-12 h-12 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-full animate-bounce"></div>
+                
+                {/* Animated Lines */}
+                <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500/30 to-transparent animate-pulse"></div>
+                <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-orange-500/30 to-transparent animate-pulse"></div>
+              </div>
+              
               <div className="absolute inset-0 bg-gradient-to-br from-purple-900/80 via-blue-900/80 to-purple-900/80"></div>
             </div>
 

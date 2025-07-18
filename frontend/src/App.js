@@ -737,15 +737,22 @@ const MainApp = () => {
             {/* Floating Animation CSS */}
             <style jsx>{`
               @keyframes float {
-                0%, 100% { transform: translateY(0px) scale(1); }
-                50% { transform: translateY(-20px) scale(1.02); }
+                0%, 100% { transform: translateY(0px) scale(1); background-position: 0% 50%; }
+                50% { transform: translateY(-20px) scale(1.02); background-position: 100% 50%; }
               }
               @keyframes glow {
                 0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.5); }
                 50% { box-shadow: 0 0 40px rgba(255, 107, 107, 0.8), 0 0 80px rgba(255, 107, 107, 0.4); }
               }
+              @keyframes cyber-pulse {
+                0%, 100% { opacity: 0.3; transform: scale(1); }
+                50% { opacity: 0.8; transform: scale(1.1); }
+              }
               .animate-glow {
                 animation: glow 2s ease-in-out infinite;
+              }
+              .animate-cyber-pulse {
+                animation: cyber-pulse 3s ease-in-out infinite;
               }
             `}</style>
 

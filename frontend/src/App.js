@@ -662,6 +662,7 @@ const MainApp = () => {
               <div className="space-y-2">
                 {[
                   { id: 'dashboard', label: 'Dashboard', icon: '📊' },
+                  { id: 'metaverse', label: 'Metaverse', icon: '🌐' },
                   { id: 'story', label: 'Bitcoin-Jagd', icon: '🎮' },
                   { id: 'staking', label: 'Staking', icon: '🏦' },
                   { id: 'streaming', label: 'Live Stream', icon: '🎥' },

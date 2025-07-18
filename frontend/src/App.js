@@ -811,6 +811,13 @@ const MainApp = () => {
             )}
 
             {/* Tab Content with Mobile Optimization */}
+            {activeTab === 'metaverse' && (
+              <MetaverseWorld 
+                walletAddress={walletAddress} 
+                isConnected={isConnected} 
+              />
+            )}
+
             {activeTab === 'dashboard' && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div className="bg-black/30 backdrop-blur-lg rounded-xl p-6 border border-purple-500/20">

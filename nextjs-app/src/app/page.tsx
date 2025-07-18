@@ -16,6 +16,7 @@ import NFTAccessPanel from '@/components/NFTAccess';
 import MobileNavigation from '@/components/MobileNavigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import MetaverseWorld from '@/components/MetaverseWorld';
 
 const API_BASE = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000';
 

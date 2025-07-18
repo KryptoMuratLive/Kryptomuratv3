@@ -696,65 +696,83 @@ const MainApp = () => {
         {!isConnected ? (
           /* Mobile-Optimized Landing Page with Animated Background */
           <div className="relative text-center py-10 md:py-20 overflow-hidden">
-            {/* Animated Background with Web3 Image */}
+            {/* Animated Background with Multiple Image Options */}
             <div className="absolute inset-0 z-0">
-              {/* Option 1: If you save the image to /app/frontend/public/web3-background.jpg */}
+              {/* Multiple image format attempts */}
               <img 
                 src="/web3-background.jpg" 
-                alt="Steig ein bei Web3"
+                alt="Jagd auf den Bitcoin"
                 className="w-full h-full object-cover opacity-25"
                 style={{
                   animation: 'float 8s ease-in-out infinite',
                   filter: 'blur(0.5px) brightness(0.8) contrast(1.2)'
                 }}
                 onError={(e) => {
-                  // Fallback if image doesn't load
-                  e.target.style.display = 'none';
+                  console.log('JPG failed, trying PNG...');
+                  e.target.src = '/web3-background.png';
+                  e.target.onerror = (e2) => {
+                    console.log('PNG failed, trying different name...');
+                    e2.target.src = '/jagd-auf-den-bitcoin.jpg';
+                    e2.target.onerror = (e3) => {
+                      console.log('All image attempts failed, hiding element');
+                      e3.target.style.display = 'none';
+                    };
+                  };
                 }}
               />
               
-              {/* Fallback CSS Background if image fails */}
+              {/* Enhanced Fallback Background with Bitcoin Hunt Theme */}
               <div 
-                className="w-full h-full opacity-30"
+                className="w-full h-full opacity-40"
                 style={{
                   background: `
                     linear-gradient(135deg, 
-                      rgba(255, 107, 107, 0.3) 0%, 
-                      rgba(78, 205, 196, 0.3) 25%, 
-                      rgba(69, 183, 209, 0.3) 50%, 
-                      rgba(255, 107, 107, 0.3) 75%, 
-                      rgba(139, 69, 19, 0.3) 100%
+                      rgba(251, 191, 36, 0.4) 0%, 
+                      rgba(59, 130, 246, 0.4) 25%, 
+                      rgba(139, 92, 246, 0.4) 50%, 
+                      rgba(251, 191, 36, 0.4) 75%, 
+                      rgba(16, 185, 129, 0.4) 100%
                     ),
-                    radial-gradient(circle at 20% 30%, rgba(255, 107, 107, 0.4) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 70%, rgba(78, 205, 196, 0.4) 0%, transparent 50%),
-                    radial-gradient(circle at 40% 80%, rgba(69, 183, 209, 0.4) 0%, transparent 50%)
+                    radial-gradient(circle at 25% 25%, rgba(251, 191, 36, 0.5) 0%, transparent 50%),
+                    radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.5) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.5) 0%, transparent 50%)
                   `,
                   animation: 'float 12s ease-in-out infinite',
                   backgroundSize: '400% 400%'
                 }}
               />
               
-              {/* Enhanced Cyber Elements */}
+              {/* Enhanced Cyber Elements with Bitcoin Hunt Theme */}
               <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-10 left-10 w-20 h-20 bg-gradient-to-br from-orange-500/30 to-red-500/30 rounded-full animate-pulse"></div>
-                <div className="absolute top-1/4 right-10 w-16 h-16 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full animate-bounce"></div>
-                <div className="absolute bottom-1/4 left-20 w-24 h-24 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full animate-pulse"></div>
-                <div className="absolute bottom-10 right-20 w-12 h-12 bg-gradient-to-br from-yellow-500/30 to-orange-500/30 rounded-full animate-bounce"></div>
+                {/* Larger animated elements */}
+                <div className="absolute top-16 left-16 w-24 h-24 bg-gradient-to-br from-yellow-500/40 to-orange-500/40 rounded-full animate-pulse"></div>
+                <div className="absolute top-1/3 right-16 w-20 h-20 bg-gradient-to-br from-blue-500/40 to-purple-500/40 rounded-full animate-bounce"></div>
+                <div className="absolute bottom-1/3 left-24 w-28 h-28 bg-gradient-to-br from-purple-500/40 to-pink-500/40 rounded-full animate-pulse"></div>
+                <div className="absolute bottom-16 right-24 w-16 h-16 bg-gradient-to-br from-green-500/40 to-teal-500/40 rounded-full animate-bounce"></div>
                 
-                {/* Bitcoin and Crypto Symbols */}
-                <div className="absolute top-32 left-32 text-4xl text-orange-500/40 animate-spin-slow">₿</div>
-                <div className="absolute top-64 right-32 text-3xl text-purple-500/40 animate-bounce">🚀</div>
-                <div className="absolute bottom-32 left-64 text-5xl text-blue-500/40 animate-pulse">💎</div>
-                <div className="absolute bottom-64 right-64 text-4xl text-green-500/40 animate-wiggle">🌟</div>
+                {/* Bitcoin Hunt Themed Symbols */}
+                <div className="absolute top-24 left-40 text-5xl text-yellow-500/50 animate-spin-slow">₿</div>
+                <div className="absolute top-48 right-40 text-4xl text-blue-500/50 animate-bounce">🎯</div>
+                <div className="absolute bottom-48 left-48 text-6xl text-purple-500/50 animate-pulse">💎</div>
+                <div className="absolute bottom-24 right-48 text-5xl text-green-500/50 animate-wiggle">🏆</div>
                 
-                {/* Animated Grid Lines */}
-                <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500/20 to-transparent animate-pulse"></div>
-                <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-orange-500/20 to-transparent animate-pulse"></div>
-                <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent animate-pulse"></div>
-                <div className="absolute bottom-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent animate-pulse"></div>
+                {/* Additional Hunt Elements */}
+                <div className="absolute top-64 left-64 text-3xl text-orange-500/40 animate-bounce">🎮</div>
+                <div className="absolute top-80 right-64 text-4xl text-red-500/40 animate-pulse">🔍</div>
+                <div className="absolute bottom-64 left-80 text-3xl text-cyan-500/40 animate-wiggle">⚡</div>
+                <div className="absolute bottom-80 right-80 text-4xl text-pink-500/40 animate-spin-slow">🌟</div>
+                
+                {/* Animated Grid Lines - More Prominent */}
+                <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-yellow-500/30 to-transparent animate-pulse"></div>
+                <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-blue-500/30 to-transparent animate-pulse"></div>
+                <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent animate-pulse"></div>
+                <div className="absolute bottom-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-orange-500/30 to-transparent animate-pulse"></div>
+                
+                {/* Central Focus Point */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-full animate-pulse"></div>
               </div>
               
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-900/70 via-blue-900/70 to-purple-900/70"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-900/60 via-blue-900/60 to-purple-900/60"></div>
             </div>
 
             {/* Floating Animation CSS */}

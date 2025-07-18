@@ -383,6 +383,14 @@ export default function Home() {
               setActiveTab={setActiveTab}
             />
 
+            {activeTab === 'metaverse' && (
+              <MetaverseWorld 
+                walletAddress={address}
+                isConnected={isConnected}
+                apiBase={API_BASE}
+              />
+            )}
+
             {activeTab === 'dashboard' && (
               <Dashboard 
                 tokenBalance={tokenBalance}

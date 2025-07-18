@@ -29,6 +29,7 @@ export default function Header({
 }: HeaderProps) {
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: '📊' },
+    { id: 'metaverse', label: 'Metaverse', icon: '🌐' },
     { id: 'story', label: 'Bitcoin-Jagd', icon: '🎮' },
     { id: 'staking', label: 'Staking', icon: '🏦' },
     { id: 'streaming', label: 'Live Stream', icon: '🎥' },
